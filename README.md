@@ -72,6 +72,7 @@ Generation → Email Delivery
 
 ## 📦 Repository Structure
 
+```
 azure-vm-intelligent-monitoring/
 │
 ├── main.py # Orchestrates complete workflow
@@ -81,6 +82,7 @@ azure-vm-intelligent-monitoring/
 ├── DEPLOYMENT_GUIDE.md # Detailed deployment steps
 ├── requirements.txt
 └── README.md
+```
 
 ------------------------------------------------------------------------
 
