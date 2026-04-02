@@ -1,0 +1,23 @@
+# Azure VM Performance Report — Python dependencies
+# Install with:  pip install -r requirements.txt
+#
+# Tested on Python 3.10 / 3.11 / 3.12 (Windows Server 2019 / 2022)
+
+# Core report generation
+python-docx>=1.1.0          # Word .docx generation and XML manipulation
+matplotlib>=3.8.0           # Chart generation (Agg backend — no GUI needed)
+python-dateutil>=2.9.0      # ISO timestamp parsing for chart x-axes
+
+# HTTP client (Azure Monitor, Graph, Log Analytics REST APIs)
+requests>=2.31.0
+
+# Data helpers
+pandas>=2.0.0               # Optional — used for future data analysis extensions
+
+# Optional: Azure Blob Storage upload
+# Install only if STORAGE_ACCOUNT_NAME is configured
+# azure-storage-blob>=12.19.0
+# azure-identity>=1.15.0
+
+# Development / testing only (not needed on the production Windows Server)
+# pytest>=7.0.0
