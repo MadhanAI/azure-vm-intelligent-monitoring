@@ -1540,7 +1540,26 @@ def analyze_vm_metrics(vm: VMMetrics, config: ReportConfig) -> dict:
             )
 
     # ── Disk ─────────────────────────────────────────────────────────
+    # Only evaluate drives that will actually appear in the report chart.
+    # This exclusion list must exactly match generate_report._filter_real_disks()
+    # so threshold alerts are never raised for drives that the chart hides.
+    #
+    # Excluded mount prefixes (same list as _filter_real_disks in generate_report.py):
+    #   /snap  — Ubuntu squashfs snap packages (always 100%, read-only by design)
+    #   /run   — tmpfs runtime (in-memory, not real storage)
+    #   /proc  — kernel procfs (virtual filesystem)
+    #   /sys   — kernel sysfs / cgroupfs (virtual filesystem)
+    #   /dev   — kernel devtmpfs (virtual device nodes)
+    _REPORT_EXCLUDED_PREFIXES = ("/snap", "/run", "/proc", "/sys", "/dev")
+
     for drive, used_pct in vm.disk_utilization.items():
+        # Skip any drive that is excluded from the report chart
+        if drive.startswith(_REPORT_EXCLUDED_PREFIXES):
+            continue
+        # Skip zero/invalid values (also filtered by _filter_real_disks)
+        if used_pct is None or used_pct == 0:
+            continue
+
         if used_pct >= config.disk_util_threshold:
             findings["status"] = (
                 "WARNING" if findings["status"] == "NORMAL" else findings["status"]
