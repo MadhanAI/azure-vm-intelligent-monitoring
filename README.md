@@ -72,10 +72,14 @@ Generation → Email Delivery
 
 ## 📦 Repository Structure
 
-azure-vm-intelligent-monitoring/ │ ├── main.py \# Orchestrates complete
-workflow ├── collect_metrics.py \# Data collection from Azure ├──
-generate_report.py \# Report generation ├── graph_mailer.py \# Email
-notifications via Graph API ├── DEPLOYMENT_GUIDE.md ├── requirements.txt
+azure-vm-intelligent-monitoring/
+│
+├── main.py # Orchestrates complete workflow
+├── collect_metrics.py # Azure data collection logic
+├── generate_report.py # Report generation
+├── graph_mailer.py # Email notifications via Microsoft Graph
+├── DEPLOYMENT_GUIDE.md # Detailed deployment steps
+├── requirements.txt
 └── README.md
 
 ------------------------------------------------------------------------
